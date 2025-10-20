@@ -17,11 +17,3 @@ module "project_name_lambda" {
     LOG_LEVEL   = 20
   }
 }
-
-# resource "aws_lambda_permission" "allow_apigw" {
-#   statement_id  = "AllowAPIGatewayInvoke"
-#   action        = "lambda:InvokeFunction"
-#   function_name = module.project_name_lambda.lambda_arn
-#   principal     = "apigateway.amazonaws.com"
-#   source_arn    = "${aws_apigatewayv2_api.project_name_api.execution_arn}/*/*" # TODO
-# }
