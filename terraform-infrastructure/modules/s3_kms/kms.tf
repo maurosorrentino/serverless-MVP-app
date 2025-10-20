@@ -42,22 +42,7 @@ resource "aws_kms_key" "project_name_s3_kms_key" {
             "aws:SourceArn": "arn:aws:s3:::${var.bucket_name}"
           }
         }
-      },
-      {
-      "Sid": "AllowLambdaUse",
-      "Effect": "Allow",
-      "Principal": {
-        "AWS": "arn:aws:iam::${var.account_id}:role/${var.lambda_role_name}"
-      },
-      "Action": [
-        "kms:Encrypt",
-        "kms:Decrypt",
-        "kms:ReEncrypt*",
-        "kms:GenerateDataKey*",
-        "kms:DescribeKey"
-      ],
-      "Resource": "*"
-    },
+      }
     ]
   })
 }

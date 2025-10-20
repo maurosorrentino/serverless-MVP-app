@@ -27,7 +27,10 @@ resource "aws_s3_bucket_policy" "example_policy" {
         Condition = {
           StringNotEquals = {
             # deny access to everyone except root user (or a role for a production setup)
-            "aws:PrincipalArn" = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+            "aws:PrincipalArn" = [
+              "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root",
+              "arn:aws:iam::${var.account_id}:role/devGitHubActionsProjectNameRole"
+            ]
           }
         }
       }
