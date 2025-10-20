@@ -35,8 +35,3 @@ resource "aws_apigatewayv2_stage" "stage_name" {
     })
   }
 }
-
-# for testing
-output "api_invoke_url" {
-  value = aws_apigatewayv2_stage.access_logging_stage.invoke_url
-}
