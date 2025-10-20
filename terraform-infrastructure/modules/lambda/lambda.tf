@@ -36,3 +36,7 @@ output "lambda_invoke_arn" {
 output "lambda_arn" {
   value = aws_lambda_function.project_name_list_s3_objects_lambda.arn
 }
+
+output "lambda_name" {
+  value = aws_lambda_function.project_name_list_s3_objects_lambda.function_name
+}
