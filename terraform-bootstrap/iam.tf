@@ -28,13 +28,13 @@ resource "aws_iam_role" "github_actions_role" {
 }
 
 resource "aws_iam_policy" "github_actions_policy" {
-  name = "${var.env}GitHubActionsProjectNamePolicy"
+  name        = "${var.env}GitHubActionsProjectNamePolicy"
   description = "Policy for GitHub Actions to deploy S3, Lambda, API Gateway, and IAM resources"
-  policy      = jsonencode({
+  policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
       {
-        Sid = "TerraformDeploymentPermissions",
+        Sid    = "TerraformDeploymentPermissions",
         Effect = "Allow",
         Action = [
           "iam:CreateRole",
@@ -72,7 +72,8 @@ resource "aws_iam_policy" "github_actions_policy" {
           "dynamodb:GetItem",
           "dynamodb:DeleteItem",
           "dynamodb:Scan",
-          "dynamodb:UpdateItem"
+          "dynamodb:UpdateItem",
+          "iam:TagRole"
         ],
         Resource = "*"
       }

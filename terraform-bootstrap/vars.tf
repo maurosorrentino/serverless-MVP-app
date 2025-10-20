@@ -10,7 +10,7 @@ variable "region" {
   default     = "eu-west-2"
 }
 
-variable "github_thumbprint" { 
+variable "github_thumbprint" {
   description = "The GitHub OIDC thumbprint"
   type        = string
   default     = "6938fd4d98bab03faadb97b34396831e3780aea1"
