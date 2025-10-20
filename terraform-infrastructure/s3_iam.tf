@@ -1,4 +1,4 @@
-resource "aws_s3_bucket_policy" "example_policy" {
+resource "aws_s3_bucket_policy" "s3_bucket_policy" {
   bucket = module.project_name_s3.bucket_id
   policy = jsonencode({
     Version = "2012-10-17"
