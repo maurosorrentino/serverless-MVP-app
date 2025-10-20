@@ -8,7 +8,7 @@ resource "aws_iam_policy" "project_name_lambda_policy" {
         Action = "s3:ListBucket"
         Resource = [
           module.project_name_s3.bucket_arn,
-          "arn:aws:s3:::${module.project_name_s3.bucket_arn}/*"
+          "${module.project_name_s3.bucket_arn}/*"
         ]
       }
     ]
