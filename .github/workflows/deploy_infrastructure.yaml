@@ -73,11 +73,12 @@ jobs:
 
       - name: Terraform Init
         working-directory: terraform-infrastructure
-        run: terraform init \
-          -backend-config="bucket=${tf_backend_bucket}" \
-          -backend-config="key=${tf_backend_key}" \
-          -backend-config="region=${aws_region}" \
-          -backend-config="dynamodb_table=${tf_dynamodb_table}"
+        run: |
+          terraform init \
+            -backend-config="bucket=${tf_backend_bucket}" \
+            -backend-config="key=${tf_backend_key}" \
+            -backend-config="region=${aws_region}" \
+            -backend-config="dynamodb_table=${tf_dynamodb_table}"
 
       - name: Terraform Plan
         working-directory: terraform-infrastructure
