@@ -39,3 +39,4 @@ resource "aws_s3_bucket_policy" "s3_bucket_policy" {
 
   depends_on = [module.project_name_s3]
 }
+
