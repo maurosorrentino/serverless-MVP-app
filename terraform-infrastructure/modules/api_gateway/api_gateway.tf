@@ -66,3 +66,16 @@ resource "aws_iam_policy" "invoke_policy" {
     ]
   })
 }
+
+resource "aws_cloudwatch_log_resource_policy" "api_gw_log_policy" {
+  policy_name     = "ApiGatewayPushToCloudWatch"
+  policy_document = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect = "Allow"
+      Principal = { Service = "apigateway.amazonaws.com" }
+      Action = "logs:PutLogEvents"
+      Resource = var.log_group_arn
+    }]
+  })
+}
