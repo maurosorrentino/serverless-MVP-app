@@ -67,7 +67,8 @@ resource "aws_iam_policy" "github_actions_policy" {
           "logs:CreateLogStream",
           "logs:PutLogEvents",
           "cloudwatch:*",
-          "sts:GetCallerIdentity"
+          "sts:GetCallerIdentity",
+          "dynamodb:PutItem"
         ],
         Resource = "*"
       }
