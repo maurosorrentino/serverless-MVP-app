@@ -123,7 +123,12 @@ resource "aws_iam_policy" "github_actions_policy" {
           "s3:GetObjectLockConfiguration",
           "s3:GetBucketObjectLockConfiguration",
           "s3:PutBucketTagging",
-          "s3:PutEncryptionConfiguration"
+          "s3:PutEncryptionConfiguration",
+          "iam:TagPolicy",
+          "iam:GetPolicyVersion",
+          "iam:CreatePolicyVersion",
+          "iam:SetDefaultPolicyVersion",
+          "iam:DeletePolicyVersion"
         ],
         Resource = "*"
       }
