@@ -13,7 +13,7 @@ s3_resource = boto3.resource("s3")
 log_level = os.environ.get("LOG_LEVEL") or 20
 
 logger = logging.getLogger()
-logger.setLevel(log_level)
+logger.setLevel(int(log_level))
 
 def get_objects(bucket):
     return [obj.key for obj in bucket.objects.all()]
