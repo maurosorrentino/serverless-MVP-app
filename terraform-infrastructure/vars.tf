@@ -11,8 +11,3 @@ variable "project_name" {
 variable "lambda_version" {
   type = string
 }
-
-variable "s3_lambda_name" {
-  description = "The S3 bucket where Lambda artifacts are stored"
-  type        = string
-}
