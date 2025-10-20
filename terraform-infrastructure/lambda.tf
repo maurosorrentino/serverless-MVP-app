@@ -3,7 +3,7 @@ module "project_name_lambda" {
 
   lambda_role_name = local.lambda_role_name
   project_name     = var.project_name
-  lambda_s3_bucket_id = var.s3_lambda_name
+  lambda_s3_bucket_id = "${var.project_name}-list-s3-contents-lambda-code-s3"
   s3_key          = "list-s3-contents-${var.lambda_version}-lambda.zip" 
   lambda_name      = "${var.project_name}_list_s3_objects"
   lambda_handler   = "get_s3_objects.lambda_handler"
