@@ -18,9 +18,9 @@ resource "aws_apigatewayv2_route" "route" {
 }
 
 # Stage with access logging
-resource "aws_apigatewayv2_stage" "access_logging_stage" {
+resource "aws_apigatewayv2_stage" "stage_name" {
   api_id      = aws_apigatewayv2_api.http_api.id
-  name        = "access_logging_stage"
+  name        = "stage_name"
   auto_deploy = true                                               # Automatically deploy changes
 
   access_log_settings {
