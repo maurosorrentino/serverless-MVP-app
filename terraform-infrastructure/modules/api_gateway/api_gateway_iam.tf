@@ -45,8 +45,3 @@ resource "aws_cloudwatch_log_resource_policy" "api_gw_log_policy" {
     }]
   })
 }
-
-# for testing
-output "api_invoke_url" {
-  value = aws_apigatewayv2_stage.stage.invoke_url
-}
