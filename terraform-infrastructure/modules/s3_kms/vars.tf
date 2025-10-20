@@ -8,7 +8,7 @@ variable "bucket_name" {
   type = string
 }
 
-variable "lambda_role_name" {
-  description = "IAM role name that the lambda function will use"
+variable "github_actions_role_name" {
+  description = "IAM role name that the GitHub Actions workflow will use"
   type = string
 }
