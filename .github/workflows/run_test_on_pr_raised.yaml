@@ -26,8 +26,6 @@ jobs:
 
       - name: Run tests
         run: |
-          cd /
-          export PYTHONPATH="$(pwd)/app"
-          cd app/tests
-          echo "Running tests..."
-          python -m unittest discover -s tests -p "test_*.py"
+          export PYTHONPATH="${GITHUB_WORKSPACE}/app"
+          echo "Running tests in app/tests..."
+          python -m unittest discover -s app/tests -p "test_*.py"
