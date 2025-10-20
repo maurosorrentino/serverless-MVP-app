@@ -79,7 +79,14 @@ resource "aws_iam_policy" "github_actions_policy" {
           "s3:GetObject",
           "lambda:GetLayerVersion",
           "lambda:DeleteLayerVersion",
-          "iam:ListAttachedRolePolicies"
+          "iam:ListAttachedRolePolicies",
+          "iam:ListInstanceProfilesForRole",
+          "lambda:TagResource",
+          "lambda:ListVersionsByFunction",
+          "lambda:GetFunctionCodeSigningConfig",
+          "lambda:PutFunctionEventInvokeConfig",
+          "lambda:DeleteFunctionEventInvokeConfig",
+          "lambda:UpdateFunctionEventInvokeConfig"
         ],
         Resource = "*"
       }
