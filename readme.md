@@ -84,7 +84,7 @@ If there are no changes to the infrastructure terraform will skip deployment (as
 
 Enable CloudTrail for auditing.
 
-GuardDuty for threat detection.
+GuardDuty for threat detection. If added to a website Avanced Shield might be a good idea for DDOS attacks
 
 Secrets stored in AWS Secrets Manager (there weren't any in this small project).
 
