@@ -73,7 +73,9 @@ resource "aws_iam_policy" "github_actions_policy" {
           "dynamodb:DeleteItem",
           "dynamodb:Scan",
           "dynamodb:UpdateItem",
-          "iam:TagRole"
+          "iam:TagRole",
+          "lambda:PublishLayerVersion",
+          "iam:ListRolePolicies"
         ],
         Resource = "*"
       }
