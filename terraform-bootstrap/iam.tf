@@ -45,6 +45,9 @@ resource "aws_iam_policy" "github_actions_policy" {
           "iam:DetachRolePolicy",
           "iam:DeleteRolePolicy",
           "iam:PassRole",
+          "iam:CreatePolicy",
+          "iam:DeletePolicy",
+          "iam:GetPolicy",
           "lambda:CreateFunction",
           "lambda:DeleteFunction",
           "lambda:GetFunction",
@@ -119,7 +122,8 @@ resource "aws_iam_policy" "github_actions_policy" {
           "s3:GetEncryptionConfiguration",
           "s3:GetObjectLockConfiguration",
           "s3:GetBucketObjectLockConfiguration",
-          "s3:PutBucketTagging"
+          "s3:PutBucketTagging",
+          "s3:PutEncryptionConfiguration"
         ],
         Resource = "*"
       }

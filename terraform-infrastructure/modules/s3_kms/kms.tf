@@ -6,22 +6,24 @@ resource "aws_kms_key" "project_name_s3_kms_key" {
     "Version" : "2012-10-17",
     "Statement" : [
       {
-        "Sid" : "AllowRootAndAdminAccess",
+        "Sid" : "AllowRole",
         "Effect" : "Allow",
         "Principal" : {
-          "AWS" : [
-            # I'm using root as it's my personal account and often use "terraform destroy"
-            # what I would do for a company I would allow a specific role
-            "arn:aws:iam::${var.account_id}:root",
-            # allow users with a specific role to decrypt logs
-            # "arn:aws:iam::${var.account_id}:role/RoleName"
-            "arn:aws:iam::${var.account_id}:role/${var.github_actions_role_name}"
-          ]
+          "AWS" : "arn:aws:iam::${var.account_id}:role/${var.github_actions_role_name}"
         },
-        # in prod limit the actions to what is strictly necessary
-        # I want everything for destroying the stack easily
         "Action" : "kms:*",
         "Resource" : "*"
+      },
+      {
+        # I'm using root as it's my personal account and often use "terraform destroy"
+        # what I would do for a company I would allow a specific role
+        Sid = "AllowRoot"
+        Effect = "Allow"
+        Principal = {
+          AWS = "arn:aws:iam::${var.account_id}:root"
+        }
+        Action   = "kms:*"
+        Resource = "*"
       },
       {
         "Sid" : "AllowS3Use",
