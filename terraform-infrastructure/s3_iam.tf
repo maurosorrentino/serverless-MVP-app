@@ -11,8 +11,8 @@ resource "aws_s3_bucket_policy" "example_policy" {
         }
         Action = "s3:ListBucket"
         Resource = [
-          "arn:aws:s3:::${local.project_name_bucket_name}",
-          "arn:aws:s3:::${local.project_name_bucket_name}/*"
+          "arn:aws:s3:::${local.project_name_contents_s3_name}",
+          "arn:aws:s3:::${local.project_name_contents_s3_name}/*"
         ]
       },
       {
@@ -21,8 +21,8 @@ resource "aws_s3_bucket_policy" "example_policy" {
         Principal = "*"
         Action    = "s3:*"
         Resource = [
-          "arn:aws:s3:::${local.project_name_bucket_name}",
-          "arn:aws:s3:::${local.project_name_bucket_name}/*"
+          "arn:aws:s3:::${local.project_name_contents_s3_name}",
+          "arn:aws:s3:::${local.project_name_contents_s3_name}/*"
         ]
         Condition = {
             StringNotEquals = {

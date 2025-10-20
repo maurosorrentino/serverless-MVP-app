@@ -3,7 +3,7 @@ module "project_name_lambda" {
 
   lambda_role_name = local.lambda_role_name
   project_name     = var.project_name
-  lambda_s3_bucket_id = data.lambda_artifacts_s3.id
+  lambda_s3_bucket_id = data.aws_s3_bucket.lambda_artifacts_s3.id
   filename       = "s3://${data.aws_s3_bucket.lambda_artifacts_s3.bucket}/list-s3-contents-${var.lambda_version}-lambda.zip"
   s3_key          = "list-s3-contents-${var.lambda_version}-lambda.zip" 
   lambda_name      = "${var.project_name}_list_s3_objects"
