@@ -1,0 +1,8 @@
+{
+    "aws_region": "eu-west-2",
+    "tf_backend_bucket": "terraform-state-department-name-testtt",
+    "tf_backend_key": "terraform.tfstate",
+    "tf_dynamodb_table": "terraform-lock-table",
+    "tf_project_name": "project-name",
+    "lambda_artifacts_bucket": "list-s3-contents-lambda-code-s3"
+}
