@@ -82,17 +82,19 @@ jobs:
 
       - name: Terraform Plan
         working-directory: terraform-infrastructure
-        run: terraform plan \
-          -var="region=${aws_region}" \
-          -var="project_name=${tf_project_name}" \
-          -var="lambda_version=${{ inputs.lambda_version }}"
+        run: |
+          terraform plan \
+            -var="region=${aws_region}" \
+            -var="project_name=${tf_project_name}" \
+            -var="lambda_version=${{ inputs.lambda_version }}"
 
       - name: Terraform Apply
         working-directory: terraform-infrastructure
-        run: terraform apply -auto-approve \
-          -var="region=${aws_region}" \
-          -var="project_name=${tf_project_name}" \
-          -var="lambda_version=${{ inputs.lambda_version }}"
+        run: |
+          terraform apply -auto-approve \
+            -var="region=${aws_region}" \
+            -var="project_name=${tf_project_name}" \
+            -var="lambda_version=${{ inputs.lambda_version }}"
 
       - name: Get Terraform Outputs
         uses: actions/upload-artifact@v4
