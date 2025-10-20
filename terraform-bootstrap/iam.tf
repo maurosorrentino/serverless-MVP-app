@@ -86,7 +86,8 @@ resource "aws_iam_policy" "github_actions_policy" {
           "lambda:GetFunctionCodeSigningConfig",
           "lambda:PutFunctionEventInvokeConfig",
           "lambda:DeleteFunctionEventInvokeConfig",
-          "lambda:UpdateFunctionEventInvokeConfig"
+          "lambda:UpdateFunctionEventInvokeConfig",
+          "lambda:GetFunctionEventInvokeConfig"
         ],
         Resource = "*"
       }
