@@ -131,7 +131,16 @@ resource "aws_iam_policy" "github_actions_policy" {
           "iam:DeletePolicyVersion",
           "iam:ListPolicyVersions",
           "apigatewayv2:*",
-          "logs:TagResource"
+          "logs:TagResource",
+          "logs:PutRetentionPolicy",
+          "logs:DescribeLogGroups",
+          "logs:ListTagsForResource",
+          "logs:DeleteLogGroup",
+          "lambda:GetPolicy",
+          "logs:CreateLogDelivery",
+          "logs:PutResourcePolicy",
+          "logs:DescribeResourcePolicies",
+          "logs:DeleteResourcePolicy"
         ],
         Resource = "*"
       }
