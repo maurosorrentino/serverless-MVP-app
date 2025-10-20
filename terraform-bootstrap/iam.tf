@@ -129,7 +129,9 @@ resource "aws_iam_policy" "github_actions_policy" {
           "iam:CreatePolicyVersion",
           "iam:SetDefaultPolicyVersion",
           "iam:DeletePolicyVersion",
-          "iam:ListPolicyVersions"
+          "iam:ListPolicyVersions",
+          "apigatewayv2:*",
+          "logs:TagResource"
         ],
         Resource = "*"
       }
