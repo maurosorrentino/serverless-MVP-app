@@ -75,7 +75,8 @@ resource "aws_iam_policy" "github_actions_policy" {
           "dynamodb:UpdateItem",
           "iam:TagRole",
           "lambda:PublishLayerVersion",
-          "iam:ListRolePolicies"
+          "iam:ListRolePolicies",
+          "s3:GetObject"
         ],
         Resource = "*"
       }
