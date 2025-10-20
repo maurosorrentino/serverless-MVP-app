@@ -1,0 +1,101 @@
+name: Deploy Infrastructure Steps
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+      lambda_version:
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    environment: ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Load environment configuration
+        id: load-env
+        run: |
+          CONFIG_FILE=".github/workflows/env/${{ inputs.environment }}/env_vars.json"
+          echo "Loading environment variables from $CONFIG_FILE"
+          if [ ! -f "$CONFIG_FILE" ]; then
+            echo "Config file not found: $CONFIG_FILE"
+            exit 1
+          fi
+          cat $CONFIG_FILE | jq -r 'to_entries | .[] | "echo \(.key)=\(.value) >> $GITHUB_ENV"' | bash
+
+      - name: Set up AWS CLI with OIDC Role
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.aws_region }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Build Lambda if artifact doesn't exist
+        run: |
+          S3_KEY="list-s3-contents-${{ inputs.lambda_version }}-lambda.zip"
+          if aws s3 ls s3://${lambda_artifacts_bucket}/$S3_KEY; then
+            echo "Artifact $S3_KEY already exists. Skipping build."
+          else
+            echo "Building Lambda package for version ${{ inputs.lambda_version }}"
+            cd app
+            pip install -r requirements.txt -t .
+            zip -r ../lambda.zip .
+            cd ..
+            aws s3 cp lambda.zip s3://${lambda_artifacts_bucket}/$S3_KEY
+          fi
+
+      - name: Build Lambda Layer if it doesn't exist
+        run: |
+          S3_KEY="list-s3-contents-${{ inputs.lambda_version }}-layer.zip"
+          if aws s3 ls s3://${lambda_artifacts_bucket}/$S3_KEY; then
+            echo "Artifact $S3_KEY already exists. Skipping layer build."
+          else
+            echo "Building Lambda layer for version ${{ inputs.lambda_version }}"
+            cd app
+            pip install -r requirements.txt -t python
+            zip -r ../lambda_layer.zip .
+            cd ..
+            aws s3 cp lambda_layer.zip s3://${lambda_artifacts_bucket}/$S3_KEY
+          fi
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform Init
+        working-directory: terraform-infrastructure
+        run: terraform init \
+          -backend-config="bucket=${tf_backend_bucket}" \
+          -backend-config="key=${tf_backend_key}" \
+          -backend-config="region=${aws_region}" \
+          -backend-config="dynamodb_table=${tf_dynamodb_table}"
+
+      - name: Terraform Plan
+        working-directory: terraform-infrastructure
+        run: terraform plan \
+          -var="region=${aws_region}" \
+          -var="project_name=${tf_project_name}" \
+          -var="lambda_version=${{ inputs.lambda_version }}"
+
+      - name: Terraform Apply
+        working-directory: terraform-infrastructure
+        run: terraform apply -auto-approve \
+          -var="region=${aws_region}" \
+          -var="project_name=${tf_project_name}" \
+          -var="lambda_version=${{ inputs.lambda_version }}"
+
+      - name: Get Terraform Outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-outputs-${{ inputs.environment }}
+          path: terraform-infrastructure/outputs.json
+          retention-days: 1

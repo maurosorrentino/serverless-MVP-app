@@ -1,0 +1,25 @@
+resource "aws_iam_policy" "project_name_lambda_policy" {
+  name = "${var.project_name}-lambda-policy"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = "s3:ListBucket"
+        Resource = [
+          module.project_name_s3.bucket_arn,
+          "arn:aws:s3:::${module.project_name_s3.bucket_arn}/*"
+        ]
+      }
+    ]
+  })
+
+  depends_on = [module.project_name_s3]
+}
+
+resource "aws_iam_role_policy_attachment" "attach_custom" {
+  role       = local.lambda_role_name
+  policy_arn = aws_iam_policy.project_name_lambda_policy.arn
+
+  depends_on = [module.project_name_lambda]
+}
