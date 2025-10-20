@@ -82,8 +82,6 @@ If there are no changes to the infrastructure terraform will skip deployment (as
 
 5. Additional Hardening
 
-Enable CloudTrail for auditing.
-
 GuardDuty for threat detection. If added to a website Avanced Shield might be a good idea for DDOS attacks
 
 Secrets stored in AWS Secrets Manager (there weren't any in this small project).
@@ -91,6 +89,9 @@ Secrets stored in AWS Secrets Manager (there weren't any in this small project).
 Lint scanning in CI/CD pipelines.
 
 API gateway (REST) can be put in a VPC and made it private with vpc endpoints if needed
+
+Versioning in the s3 bucket for the lambda code could also be enabled if we are scared of file removal (not recommended in my opinion
+it's unlikely that happens and if it does you can still get the code of the lambda by checking out to specific tag)
 
 How to test
 in terraform-infrastructure directory there is a test.py file for calling the API, make sure you add the role to the api policy that you have access to to get a 200

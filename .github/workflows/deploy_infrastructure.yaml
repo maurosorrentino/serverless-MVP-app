@@ -18,6 +18,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # as of now it's not needed as dev and prod use the same key value pair
+      # step is here for cases where different environments might need different variables
       - name: Load environment configuration
         id: load-env
         run: |
