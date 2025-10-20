@@ -17,7 +17,6 @@ resource "aws_apigatewayv2_route" "route" {
   authorization_type  = "AWS_IAM"                                 
 }
 
-# Stage with access logging
 resource "aws_apigatewayv2_stage" "stage_name" {
   api_id      = aws_apigatewayv2_api.http_api.id
   name        = var.environment
