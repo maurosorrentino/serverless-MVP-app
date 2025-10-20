@@ -17,8 +17,8 @@ permissions:
 
 jobs:
   deploy:
-    name: Deploy infra to ${{ github.event.inputs.environment }} environment
-    uses: ./.github/workflows/deploy_infrastructure.yml
+    name: Deploying ${{ github.ref_name }} version
+    uses: ./.github/workflows/deploy_infrastructure.yaml
     secrets: inherit
     with:
       environment: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/prod-v') && 'prod' || 'dev' }}
