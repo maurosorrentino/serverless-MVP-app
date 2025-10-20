@@ -12,6 +12,6 @@ auth = AWS4Auth(
     session_token=credentials.token
 )
 
-url = 'https://iyly2v1o2h.execute-api.eu-west-2.amazonaws.com/access_logging_stage/'
+url = 'https://iyly2v1o2h.execute-api.eu-west-2.amazonaws.com/stage_name/'
 r = requests.get(url, auth=auth)
 print(r.status_code, r.text)
