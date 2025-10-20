@@ -1,5 +1,5 @@
 resource "aws_lambda_layer_version" "project_name_dependencies_layer" {
-  filename           = "s3://${var.lambda_s3_bucket}/${var.project_name}-layer-${var.lambda_version}.zip"
+  filename           = var.filename
   layer_name         = "${var.project_name}-deps"
   compatible_runtimes = [var.lambda_runtime]
 }

@@ -44,3 +44,8 @@ variable "s3_key" {
   description = "The S3 key for the Lambda function code"
   type        = string
 }
+
+variable "filename" {
+  description = "lambda layer filename"
+  type = string
+}
