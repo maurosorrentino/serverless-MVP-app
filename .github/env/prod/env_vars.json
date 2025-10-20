@@ -5,5 +5,4 @@
     "tf_dynamodb_table": "terraform-lock-table-serverless-project",
     "tf_project_name": "project-name",
     "lambda_artifacts_bucket": "list-s3-contents-lambda-code-s3",
-    "environment": "prod"
 }
