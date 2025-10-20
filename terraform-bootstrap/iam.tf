@@ -76,7 +76,10 @@ resource "aws_iam_policy" "github_actions_policy" {
           "iam:TagRole",
           "lambda:PublishLayerVersion",
           "iam:ListRolePolicies",
-          "s3:GetObject"
+          "s3:GetObject",
+          "lambda:GetLayerVersion",
+          "lambda:DeleteLayerVersion",
+          "iam:ListAttachedRolePolicies"
         ],
         Resource = "*"
       }
