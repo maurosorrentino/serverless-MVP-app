@@ -4,8 +4,8 @@ module "project_name_lambda" {
   lambda_role_name = local.lambda_role_name
   project_name     = var.project_name
   lambda_s3_bucket = data.aws_s3_bucket.lambda_artifacts_s3.bucket
-  filename       = "s3://${data.aws_s3_bucket.lambda_artifacts_s3.bucket}/list-s3-contents-${var.lambda_version}-lambda.zip"
-  s3_key          = "list-s3-contents-${var.lambda_version}-lambda.zip" 
+  layer_key        = "list-s3-contents-${var.lambda_version}-layer.zip"
+  s3_lambda_key    = "list-s3-contents-${var.lambda_version}-lambda.zip"
   lambda_name      = "${var.project_name}_list_s3_objects"
   lambda_handler   = "get_s3_objects.lambda_handler"
   lambda_runtime   = "python3.11"

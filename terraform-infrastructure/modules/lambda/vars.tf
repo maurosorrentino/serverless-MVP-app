@@ -40,12 +40,12 @@ variable "lambda_s3_bucket" {
   type        = string
 }
 
-variable "s3_key" {
+variable "s3_lambda_key" {
   description = "The S3 key for the Lambda function code"
   type        = string
 }
 
-variable "filename" {
+variable "layer_key" {
   description = "lambda layer filename"
   type = string
 }
