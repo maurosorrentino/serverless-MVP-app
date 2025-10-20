@@ -1,7 +1,6 @@
 variable "region" {
   description = "aws region where to deploy resources"
   type        = string
-  default     = "eu-west-2"
 }
 
 variable "project_name" {
@@ -17,4 +16,3 @@ variable "s3_lambda_name" {
   description = "The S3 bucket where Lambda artifacts are stored"
   type        = string
 }
-
