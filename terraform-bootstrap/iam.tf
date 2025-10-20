@@ -128,7 +128,8 @@ resource "aws_iam_policy" "github_actions_policy" {
           "iam:GetPolicyVersion",
           "iam:CreatePolicyVersion",
           "iam:SetDefaultPolicyVersion",
-          "iam:DeletePolicyVersion"
+          "iam:DeletePolicyVersion",
+          "iam:ListPolicyVersions"
         ],
         Resource = "*"
       }
