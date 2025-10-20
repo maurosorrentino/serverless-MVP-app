@@ -15,17 +15,6 @@ resource "aws_kms_key" "project_name_s3_kms_key" {
         "Resource" : "*"
       },
       {
-        # I'm using root as it's my personal account and often use "terraform destroy"
-        # what I would do for a company I would allow a specific role
-        Sid = "AllowRoot"
-        Effect = "Allow"
-        Principal = {
-          AWS = "arn:aws:iam::${var.account_id}:root"
-        }
-        Action   = "kms:*"
-        Resource = "*"
-      },
-      {
         "Sid" : "AllowS3Use",
         "Effect" : "Allow",
         "Principal" : {
