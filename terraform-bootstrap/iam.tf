@@ -87,7 +87,16 @@ resource "aws_iam_policy" "github_actions_policy" {
           "lambda:PutFunctionEventInvokeConfig",
           "lambda:DeleteFunctionEventInvokeConfig",
           "lambda:UpdateFunctionEventInvokeConfig",
-          "lambda:GetFunctionEventInvokeConfig"
+          "lambda:GetFunctionEventInvokeConfig",
+          "kms:TagResource",
+          "kms:ListAliases",
+          "kms:CreateAlias",
+          "kms:DescribeKey",
+          "kms:CreateKey",
+          "kms:ScheduleKeyDeletion",
+          "kms:EnableKeyRotation",
+          "kms:DisableKeyRotation",
+          "kms:UpdateAlias"
         ],
         Resource = "*"
       }
