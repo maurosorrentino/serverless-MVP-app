@@ -25,3 +25,7 @@ variable "account_id" {
 variable "lambda_function_name" {
   type = string
 }
+
+variable "environment" {
+  type = string
+}

@@ -29,7 +29,8 @@ resource "aws_s3_bucket_policy" "s3_bucket_policy" {
             # deny access to everyone except root user (or a role for a production setup)
             "aws:PrincipalArn" = [
               "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root",
-              "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${local.github_actions_role_name}"
+              "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${local.github_actions_role_name}",
+              "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${local.lambda_role_name}"
             ]
           }
         }

@@ -3,6 +3,7 @@ module "project_name_api_gateway" {
   
   api_name = local.api_name
   lambda_invoke_arn = module.project_name_lambda.lambda_arn
+  environment = var.environment
   policy_name = "${var.project_name}-api-gateway-policy"
   github_actions_role_name = local.github_actions_role_name
   log_group_arn = aws_cloudwatch_log_group.project_name_api_gtw_log_group.arn

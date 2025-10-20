@@ -11,3 +11,7 @@ variable "project_name" {
 variable "lambda_version" {
   type = string
 }
+
+variable "environment" {
+  type = string
+}
