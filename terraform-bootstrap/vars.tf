@@ -19,4 +19,5 @@ variable "github_thumbprint" {
 variable "github_repo" {
   description = "The GitHub repository in the format owner/repo"
   type        = string
+  default = "maurosorrentino/serverless-MVP-app"
 }
