@@ -7,7 +7,7 @@ resource "aws_lambda_layer_version" "project_name_dependencies_layer" {
 resource "aws_lambda_function" "project_name_list_s3_objects_lambda" {
   function_name    = var.lambda_name
   role             = aws_iam_role.project_name_lambda_exec.arn
-  s3_bucket        = var.lambda_s3_bucket_id
+  s3_bucket        = var.lambda_s3_bucket
   s3_key           = var.s3_key
   handler          = var.lambda_handler
   runtime          = var.lambda_runtime

@@ -35,7 +35,7 @@ variable "project_name" {
   type = string
 }
 
-variable "lambda_s3_bucket_id" {
+variable "lambda_s3_bucket" {
   description = "The S3 bucket where Lambda artifacts are stored"
   type        = string
 }
