@@ -12,7 +12,7 @@ resource "aws_kms_key" "project_name_s3_kms_key" {
           "AWS" : [
             # I'm using root as it's my personal account and often use "terraform destroy"
             # what I would do for a company I would allow a specific role
-            "arn:aws:iam::${var.account_id}:root"
+            "arn:aws:iam::${var.account_id}:root",
             # allow users with a specific role to decrypt logs
             # "arn:aws:iam::${var.account_id}:role/RoleName"
             "arn:aws:iam::${var.account_id}:role/devGitHubActionsProjectNameRole" # TODO: adjust role name
