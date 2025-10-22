@@ -1,95 +1,59 @@
-1. Monitoring Health and Performance
+# AWS Lambda + API Gateway Project
 
-Key metrics include:
+This project demonstrates a secure serverless application made by AWS Lambda function exposed via API Gateway, with CI/CD integration using GitHub Actions.
 
-Lambda: invocation count, execution duration, error count, throttles, and concurrent executions.
+## 1. Monitoring Health and Performance
 
-API Gateway (HTTP): 4XX/5XX error rates, latency, and request count. HTTP API is chosen for cost efficiency (~70% cheaper) as we can secure it with policies. 
-If more security is needed, for example WAF, certificates, api keys, throttoling or more features like traces or caching it should be changed to rest api.
+**Key Metrics:**
 
-Logs are centralized in CloudWatch, with Lambda and API Gateway writing structured logs for easier parsing and debugging.
+- **Lambda:** invocation count, execution duration, error count, throttles, concurrent executions  
+- **API Gateway (HTTP API):** 4XX/5XX error rates, latency, request count  
 
-2. Dashboarding and Alerting (not done via code)
+> **Note:** HTTP API is chosen for cost efficiency (around 70% cheaper). For advanced security (WAF, API keys, throttling) or features like caching/traces, use REST API.
 
-For metrics I would use Amazon managed Grafana (or host it depending on team size and company needs) while for logs opensearch (can also be serverless)
+**Logging:**  
+All logs are centralized in CloudWatch. Lambda and API Gateway write structured logs for easy parsing and debugging.
 
-Alerting: for alerts on AWS we can use a mix of technologies, cloudwatch metric filter -> cloudwatch alarm -> SNS -> chatbot -> slack or teams
-or alering related to metrics we can use Grafana (they charge per active user)
+## 2. Dashboarding and Alerting (TODO)
 
-3. Reducing Noise
+**Metrics Visualization:**  
+- Amazon Managed Grafana (or self-hosted based on team size)  
 
-Alerts should be time averaged to avoid false positives.
+**Logs Analysis:**  
+- OpenSearch (can be serverless)  
 
-Security
+**Alerting:**  
+- CloudWatch metric filter → CloudWatch alarm → SNS → chatbot → Slack/Teams  
+- Grafana alerts
 
-Please note, I did this project with my personal account so I used the root account. I would either use specific services or specific roles.
+**Noise Reduction:**  
+- Alerts are time-averaged to reduce false positives.
 
-1. API Gateway
+## 3. Security
 
-HTTP API restricts access via IAM policies to specific roles.
+> This project used a personal AWS root account. In production, use service-specific roles.
 
-Requests are encrypted using HTTPS.
+### API Gateway
+- HTTP API restricts access via IAM policies.  
+- Requests encrypted using HTTPS.  
+- Optional Cognito integration for authentication.
 
-Optional Cognito integration can be used if authentication is required.
+### Lambda
+- Only lists S3 bucket contents.  
+- IAM role has least privilege: `s3:ListBucket` only.  
+- Logs written to dedicated CloudWatch Log Group (optionally KMS encrypted).
+- Lambda uses HTTPS by default.
 
-2. Lambda
+### S3 and KMS
+- Objects encrypted with KMS keys.  
+- Access granted to:
+  - Lambda (list objects)  
+  - GitHub Actions role (deployment)  
+  - Root (replace with specific roles in production)  
+- Protects against accidental s3 policy deletion since objects remain encrypted, lambda doesn't have permissions to decrypt.
 
-The Lambda function only lists S3 bucket contents.
+## 4. CI/CD Integration
 
-Its IAM role grants the least privilege required: only s3:ListBucket for the target bucket.
-
-Logs are written to a dedicated CloudWatch Log Group, optionally encrypted with KMS.
-
-3. S3 and KMS
-
-Objects in S3 are encrypted with KMS keys.
-
-Access is granted to:
-
-Lambda (for listing objects)
-
-GitHub Actions role and root (for deployment and management; in production, replace root with specific user roles)
-
-S3 itself for operations requiring KMS permissions
-
-Even though not everybody can access the bucket because of it's policy some people might still be able to delete the policy and access it 
-that's why the data is encrypted with kms keys
-
-4. CI/CD Integration
-
-GitHub Actions handles both testing and deployment:
-
-PR workflow runs Python tests, if branch is protected people won't be able to merge if a test fail.
-
-Build workflow packages Lambda functions/layers, uploads them to S3 with versioned tags, and runs Terraform for infrastructure changes.
-
-Rollback strategies:
-
-Application: redeploy previous version by selecting the version tag.
-
-Infrastructure: reset the branch to the last known working tag.
-
-This setup had app and infrastructure in a single pipeline but it's like they are 2 different things, for the application if in the s3
-there is already code with the same version it will skip build and upload to s3
-
-If there are no changes to the infrastructure terraform will skip deployment (assuming that nobody removed the state file)
-
-5. Additional Hardening
-
-GuardDuty for threat detection. If added to a website Avanced Shield might be a good idea for DDOS attacks
-
-Secrets stored in AWS Secrets Manager (there weren't any in this small project).
-
-Lint scanning in CI/CD pipelines.
-
-API gateway (REST) can be put in a VPC and made it private with vpc endpoints if needed
-
-Versioning in the s3 bucket for the lambda code could also be enabled if we are scared of file removal (not recommended in my opinion
-it's unlikely that happens and if it does you can still get the code of the lambda by checking out to specific tag)
-
-How to use / test
-deploy manually resources in terraform-bootstrap directory to deploy permissions for github actions. Once done, push code to github
-to so that you can use the pipeline to deploy anything else.
-
-in terraform-infrastructure directory there is a test.py file for calling the API, make sure you add the role to the api policy that you have access to to get a 200
-I chose github actions because it has a lot of features and the majority of devops know it so it becomes easier to hire.
+**GitHub Actions Workflow:**
+- **PR Workflow:** Runs Python tests. Protected branches prevent merging on test failure.  
+- **Build Workflow:** Runs tests, packages Lambda functions/layers, uploads to S3 with versioned tags, runs Terraform for infra chang

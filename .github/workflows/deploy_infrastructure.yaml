@@ -27,6 +27,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          cd app
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          export PYTHONPATH="${GITHUB_WORKSPACE}/app"
+          echo "Running tests in app/tests..."
+          python -m unittest discover -s app/tests -p "test_*.py"
+
       - name: Set up AWS CLI with OIDC Role
         uses: aws-actions/configure-aws-credentials@v3
         with:
