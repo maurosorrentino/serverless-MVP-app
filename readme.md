@@ -57,3 +57,20 @@ All logs are centralized in CloudWatch. Lambda and API Gateway write structured 
 **GitHub Actions Workflow:**
 - **PR Workflow:** Runs Python tests. Protected branches prevent merging on test failure.  
 - **Build Workflow:** Runs tests, packages Lambda functions/layers, uploads to S3 with versioned tags, runs Terraform for infra chang
+
+## 5. Additional Hardening
+
+- **GuardDuty:** Threat detection  
+- **AWS Advanced Shield:** Optional for DDoS protection
+- **CI/CD Linting:** Ensures code quality and security checks 
+- **API Gateway REST Options:** Can be put in a VPC and made private using VPC endpoints
+- **S3 Versioning:** Optional for Lambda code backup (can retrieve older versions if deleted)  
+
+## 6. How to Use / Test
+
+1. Deploy resources in `terraform-bootstrap` for GitHub Actions permissions.  
+2. Push code to GitHub to trigger pipeline for further deployments.  
+3. In `terraform-infrastructure`, use `test.py` to call the API:  
+   - Add your role to the API policy for a `200` response.  
+
+> GitHub Actions was chosen for its features and wide familiarity among DevOps teams.
