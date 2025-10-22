@@ -18,7 +18,7 @@ env:
   TF_DYNAMODB_TABLE: terraform-lock-table-serverless-project
   TF_PROJECT_NAME: project-name
   ENV: ${{ inputs.environment }}
-  LAMBDA_ARTIFACTS_BUCKERT: ${{ TF_PROJECT_NAME }}-list-s3-contents-lambda-code-s3
+  LAMBDA_ARTIFACTS_BUCKERT: list-s3-contents-lambda-code-s3
 
 permissions:
   id-token: write
