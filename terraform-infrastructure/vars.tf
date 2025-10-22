@@ -1,17 +1,18 @@
-variable "region" {
-  description = "aws region where to deploy resources"
-  type        = string
-}
-
 variable "project_name" {
   type    = string
-  default = "project-name"
 }
 
 variable "lambda_version" {
   type = string
 }
 
-variable "environment" {
+# some company use ENV in naming conventions
+variable "ENV" {
   type = string
+}
+
+# using it in names might be usefull to have unique names (s3 for example)
+variable "AWS_REGION" {
+  description = "aws region where to deploy resources"
+  type        = string
 }
