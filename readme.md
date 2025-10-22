@@ -1,15 +1,11 @@
-Observability
-
 1. Monitoring Health and Performance
 
-This serverless application focuses on monitoring Lambda, API Gateway, and S3. Key metrics include:
+Key metrics include:
 
 Lambda: invocation count, execution duration, error count, throttles, and concurrent executions.
 
 API Gateway (HTTP): 4XX/5XX error rates, latency, and request count. HTTP API is chosen for cost efficiency (~70% cheaper) as we can secure it with policies. 
 If more security is needed, for example WAF, certificates, api keys, throttoling or more features like traces or caching it should be changed to rest api.
-
-S3: request count, error rates, and storage trends.
 
 Logs are centralized in CloudWatch, with Lambda and API Gateway writing structured logs for easier parsing and debugging.
 
@@ -23,8 +19,6 @@ or alering related to metrics we can use Grafana (they charge per active user)
 3. Reducing Noise
 
 Alerts should be time averaged to avoid false positives.
-
-Log-based filters isolate specific errors from generic ones.
 
 Security
 
@@ -93,6 +87,9 @@ API gateway (REST) can be put in a VPC and made it private with vpc endpoints if
 Versioning in the s3 bucket for the lambda code could also be enabled if we are scared of file removal (not recommended in my opinion
 it's unlikely that happens and if it does you can still get the code of the lambda by checking out to specific tag)
 
-How to test
+How to use / test
+deploy manually resources in terraform-bootstrap directory to deploy permissions for github actions. Once done, push code to github
+to so that you can use the pipeline to deploy anything else.
+
 in terraform-infrastructure directory there is a test.py file for calling the API, make sure you add the role to the api policy that you have access to to get a 200
 I chose github actions because it has a lot of features and the majority of devops know it so it becomes easier to hire.

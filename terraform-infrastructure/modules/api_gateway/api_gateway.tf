@@ -14,7 +14,7 @@ resource "aws_apigatewayv2_route" "route" {
   api_id              = aws_apigatewayv2_api.http_api.id
   route_key           = "GET /" # Single GET / route
   target              = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
-  authorization_type  = "AWS_IAM"                                 
+  authorization_type  = "AWS_IAM"              
 }
 
 resource "aws_apigatewayv2_stage" "stage_name" {
