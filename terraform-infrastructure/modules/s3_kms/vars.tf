@@ -5,10 +5,10 @@ variable "account_id" {
 
 variable "bucket_name" {
   description = "bucket name for kms key"
-  type = string
+  type        = string
 }
 
 variable "github_actions_role_name" {
   description = "IAM role name that the GitHub Actions workflow will use"
-  type = string
+  type        = string
 }
