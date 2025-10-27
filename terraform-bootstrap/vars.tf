@@ -21,3 +21,8 @@ variable "github_repo" {
   type        = string
   default = "maurosorrentino/serverless-MVP-app"
 }
+
+variable "project_name" {
+  type = string
+  default = "project-name"
+}
