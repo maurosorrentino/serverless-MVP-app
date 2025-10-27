@@ -10,7 +10,7 @@ variable "policy_name" {
   type = string
 }
 
-variable "github_actions_role_name" {
+variable "role_name_allowed_to_invoke" {
   type = string
 }
 
