@@ -17,7 +17,7 @@ env:
   TF_DYNAMODB_TABLE: terraform-lock-table-serverless-project
   TF_PROJECT_NAME: project-name
   ENV: ${{ inputs.environment }}
-  LAMBDA_ARTIFACTS_BUCKET: list-s3-contents-lambda-code-s3
+  ECR_REPO_LAMBDA: ${TF_PROJECT_NAME}-ecr-lambda-repo
 
 jobs:
   deploy:
@@ -50,33 +50,17 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Build Lambda if artifact doesn't exist
-        run: |
-          S3_KEY="list-s3-contents-${{ inputs.lambda_version }}-lambda.zip"
-          if aws s3 ls s3://${LAMBDA_ARTIFACTS_BUCKET}/$S3_KEY; then
-            echo "Artifact $S3_KEY already exists. Skipping build."
-          else
-            echo "Building Lambda package for version ${{ inputs.lambda_version }}"
-            cd app
-            pip install -r requirements.txt -t .
-            zip -r ../lambda.zip .
-            cd ..
-            aws s3 cp lambda.zip s3://${LAMBDA_ARTIFACTS_BUCKET}/$S3_KEY
-          fi
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build Lambda Layer if it doesn't exist
+      - name: Build and push lambda image
         run: |
-          S3_KEY="list-s3-contents-${{ inputs.lambda_version }}-layer.zip"
-          if aws s3 ls s3://${LAMBDA_ARTIFACTS_BUCKET}/$S3_KEY; then
-            echo "Artifact $S3_KEY already exists. Skipping layer build."
-          else
-            echo "Building Lambda layer for version ${{ inputs.lambda_version }}"
-            cd app
-            pip install -r requirements.txt -t python
-            zip -r ../lambda_layer.zip .
-            cd ..
-            aws s3 cp lambda_layer.zip s3://${LAMBDA_ARTIFACTS_BUCKET}/$S3_KEY
-          fi
+          LAMBDA_TAG=${{ inputs.lambda_version }}
+          docker build -t $ECR_REPO_LAMBDA:$LAMBDA_TAG app/lambda
+          docker tag $ECR_REPO_LAMBDA:$LAMBDA_TAG ${{ steps.login-ecr.outputs.registry }}/${ECR_REPO_LAMBDA}:$LAMBDA_TAG
+          docker push ${{ steps.login-ecr.outputs.registry }}/${ECR_REPO_LAMBDA}:$LAMBDA_TAG
+          echo "LAMBDA_IMAGE=${{ steps.login-ecr.outputs.registry }}/${ECR_REPO_LAMBDA}:$LAMBDA_TAG" >> $GITHUB_ENV
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
