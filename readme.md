@@ -17,7 +17,7 @@ All logs are centralized in CloudWatch. Lambda and API Gateway write structured 
 ## 2. Dashboarding and Alerting (TODO)
 
 **Metrics Visualization:**  
-- Amazon Managed Grafana (or self-hosted based on team size)  
+- Amazon Managed Grafana (or self-hosted based on team size and company goals)  
 
 **Logs Analysis:**  
 - OpenSearch (can be serverless)  

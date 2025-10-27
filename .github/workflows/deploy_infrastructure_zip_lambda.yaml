@@ -50,11 +50,6 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
       - name: Build Lambda if artifact doesn't exist
         run: |
           S3_KEY="list-s3-contents-${{ inputs.lambda_version }}-lambda.zip"
