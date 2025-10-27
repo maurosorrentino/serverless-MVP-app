@@ -22,6 +22,7 @@ resource "aws_iam_policy" "invoke_policy" {
           StringEquals = {
             "aws:PrincipalArn" = [
               "arn:aws:iam::${var.account_id}:root",
+              # this is used as an example of another principal that might need access, change as needed
               "arn:aws:iam::${var.account_id}:role/${var.github_actions_role_name}"
             ]
           }
