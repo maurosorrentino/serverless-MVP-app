@@ -8,12 +8,12 @@ variable "lambda_name" {
 
 variable "lambda_handler" {
   description = "the function entry point in the code"
-  type = string
+  type        = string
 }
 
 variable "lambda_runtime" {
   description = "the runtime environment for the Lambda function"
-  type = string
+  type        = string
 }
 
 variable "lambda_timeout" {
@@ -22,7 +22,7 @@ variable "lambda_timeout" {
 }
 
 variable "lambda_memory" {
-  type        = number
+  type = number
 }
 
 variable "env_vars" {
@@ -47,5 +47,5 @@ variable "s3_lambda_key" {
 
 variable "layer_key" {
   description = "lambda layer filename"
-  type = string
+  type        = string
 }
