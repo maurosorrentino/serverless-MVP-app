@@ -41,7 +41,10 @@ resource "aws_cloudwatch_log_resource_policy" "api_gw_log_policy" {
     Statement = [{
       Effect    = "Allow"
       Principal = { Service = "apigateway.amazonaws.com" }
-      Action    = "logs:PutLogEvents"
+      Action    = [
+        "logs:PutLogEvents",
+        "logs:CreateLogStream"
+      ]
       Resource  = "${var.log_group_arn}:*"
     }]
   })
