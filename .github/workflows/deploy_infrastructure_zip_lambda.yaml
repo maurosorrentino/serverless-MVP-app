@@ -32,7 +32,7 @@ jobs:
       - name: Load environment configuration
         id: load-env
         run: |
-          CONFIG_FILE=".github/workflows/env/${{ inputs.environment }}/env_vars.json"
+          CONFIG_FILE=".github/workflows/env_vars/${{ inputs.environment }}/env_vars.json"
           echo "Loading environment variables from $CONFIG_FILE"
           if [ ! -f "$CONFIG_FILE" ]; then
             echo "❌ Config file not found: $CONFIG_FILE"
