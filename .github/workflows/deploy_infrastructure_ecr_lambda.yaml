@@ -10,15 +10,6 @@ on:
         required: true
         type: string
 
-env:
-  AWS_REGION: eu-west-2
-  TF_BACKEND_BUCKET: terraform-state-department-name-serverless-project
-  TF_BACKEND_KEY: terraform.tfstate
-  TF_DYNAMODB_TABLE: terraform-lock-table-serverless-project
-  TF_PROJECT_NAME: project-name
-  ENV: ${{ inputs.environment }}
-  ECR_REPO_LAMBDA: ${TF_PROJECT_NAME}-ecr-lambda-repo
-
 jobs:
   deploy:
     environment: ${{ inputs.environment }}
