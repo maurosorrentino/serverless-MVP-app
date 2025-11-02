@@ -27,6 +27,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # loading environment variables from .github/workflows/env_vars/<environment>/env_vars.json
+      # the reason why is because we can set the vars once and use them in multiple pipelines
+      - name: Load environment configuration
+        id: load-env
+        run: |
+          CONFIG_FILE=".github/workflows/env/${{ inputs.environment }}/env_vars.json"
+          echo "Loading environment variables from $CONFIG_FILE"
+          if [ ! -f "$CONFIG_FILE" ]; then
+            echo "❌ Config file not found: $CONFIG_FILE"
+            exit 1
+          fi
+
+          cat $CONFIG_FILE | jq -r 'to_entries | .[] | "echo \(.key)=\(.value) >> $GITHUB_ENV"' | bash
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
