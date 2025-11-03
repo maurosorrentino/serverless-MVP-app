@@ -1,4 +1,4 @@
-name: infrastructure-pipeline
+name: infrastructure-pipeline-ecr-lambda-deploy
 
 on:
   push:
