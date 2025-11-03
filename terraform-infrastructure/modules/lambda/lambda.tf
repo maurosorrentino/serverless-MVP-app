@@ -31,7 +31,7 @@
 # }
 
 # use the following for lambda from ecr
-resource "aws_lambda_function" "from_ecr" {
+resource "aws_lambda_function" "project_name_list_s3_objects_lambda" {
   function_name = var.lambda_name
   package_type  = "Image"
   role          = aws_iam_role.project_name_lambda_exec.arn
@@ -46,7 +46,7 @@ resource "aws_lambda_function" "from_ecr" {
 }
 
 resource "aws_lambda_function_event_invoke_config" "project_name_lambda_invoke_config" {
-  function_name = aws_lambda_function.from_ecr.function_name
+  function_name = aws_lambda_function.project_name_list_s3_objects_lambda.function_name
 
   maximum_retry_attempts = 2
 }

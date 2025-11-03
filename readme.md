@@ -47,7 +47,7 @@ All logs are centralized in CloudWatch. Lambda and API Gateway write structured 
 ### S3 and KMS
 - Objects encrypted with KMS keys.  
 - Access granted to:
-  - Lambda (list objects)  
+  - Lambda (list objects)
   - GitHub Actions role (deployment)  
   - Root (replace with specific roles in production)  
 - S3 IAM Policy is for preventing access from other teams, KMS in case somebody has permissions to remove the policy.
