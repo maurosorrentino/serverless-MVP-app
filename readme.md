@@ -50,7 +50,7 @@ All logs are centralized in CloudWatch. Lambda and API Gateway write structured 
   - Lambda (list objects)  
   - GitHub Actions role (deployment)  
   - Root (replace with specific roles in production)  
-- Protects against accidental s3 policy deletion since objects remain encrypted, lambda doesn't have permissions to decrypt.
+- S3 IAM Policy is for preventing access from other teams, KMS in case somebody has permissions to remove the policy.
 
 ## 4. CI/CD Integration
 
