@@ -63,7 +63,7 @@ jobs:
         run: |
           LAMBDA_TAG=${{ inputs.lambda_version }}
 
-          if aws ecr describe-images --repository-name=$ECR_REPO_LAMBDA --image-ids=imageTag=$LAMBDA_TAG 2>/dev/null; then
+          if aws ecr describe-images --repository-name=$ECR_REPO_LAMBDA --image-ids=imageTag=$LAMBDA_TAG; then
               echo "Image already exists. Skipping build and push."
           else
               echo "Image not found. Building and pushing..."
