@@ -1,76 +1,85 @@
-# AWS Lambda + API Gateway Project
+## 📌 Notes
+- HTTP API Gateway chosen for cost efficiency (~70% cheaper than REST).  
+- This project highlights real deployment pipelines and serverless architecture, while demonstrating awareness of monitoring, 
+alerting, and advanced security best practices for production environments.
+- Some IAM policies reference the root account because this project uses a personal AWS account. In production, replace 
+these with dedicated roles or remove root access entirely to follow the principle of least privilege.
 
-This project demonstrates a secure serverless application made by AWS Lambda function exposed via API Gateway, with CI/CD integration using GitHub Actions.
+# Serverless AWS Project: Lambda + API Gateway
 
-## 1. Monitoring Health and Performance
+This project demonstrates a secure, serverless application built on **AWS Lambda**, exposed via **API Gateway**, with **CI/CD pipelines** and 
+infrastructure managed via **Terraform**. It’s a hands-on showcase of modern serverless architecture and deployment automation, including 
+considerations for security, monitoring, and scalability.
 
-**Key Metrics:**
+## ✅ Implemented Features
 
-- **Lambda:** invocation count, execution duration, error count, throttles, concurrent executions  
-- **API Gateway (HTTP API):** 4XX/5XX error rates, latency, request count  
+### AWS Lambda & API Gateway
+- Lambda function exposed via **HTTP API Gateway**.
+- Supports:
+  - **Lambda from Docker Image** (built and pushed to **ECR** via CI/CD pipeline).  
+  - **Lambda from S3** (packaged zip uploaded via CI/CD pipeline, follow instructions in the comment to enable this as ECR code needs to be 
+  commented and s3 code needs to be uncommented).  
+- Basic API security:
+  - HTTPS requests
+  - IAM policy-based access control
+- Functionality: Lists contents of an S3 bucket (demonstrates least-privilege IAM role).
 
-> **Note:** HTTP API is chosen for cost efficiency (around 70% cheaper). For advanced security (WAF, API keys, throttling) or features like caching/traces, use REST API.
+### Infrastructure as Code
+- **Terraform modules** for Lambda, API Gateway, ECR, S3, and KMS.
+- Automated deployment pipelines via Terraform.
+- Resource versioning and secure IAM permissions.
 
-**Logging:**  
-All logs are centralized in CloudWatch. Lambda and API Gateway write structured logs for easy parsing and debugging.
+### CI/CD Pipelines (GitHub Actions)
+- **PR Workflow:** Runs Python unit tests to validate code before merge.
+- **Build & Deploy Workflow:**
+  - Packages Lambda (Docker image or zip)
+  - Uploads to S3 or ECR
+  - Applies Terraform changes automatically
+- **Checks:** Basic tests.
 
-## 2. Dashboarding and Alerting (TODO)
+### Security & Permissions
+- **KMS encryption** for sensitive S3 objects or in case somebody that shouldn't have access has permissions to delete s3 policy.
+- **IAM least-privilege** roles for Lambda and CI/CD deployment.
+- S3 bucket access restricted to (policy is present to prevent other teams accessing the bucket):
+  - Lambda functions
+  - GitHub Actions deployment role
+- Lambda logs centralized in CloudWatch (structured logs).
+- HTTPS enforced by default for Lambda and API Gateway.
 
-**Metrics Visualization:**  
-- Amazon Managed Grafana (or self-hosted based on team size and company goals)  
+### Monitoring
+- Centralized logging and structured parsing in CloudWatch
 
-**Logs Analysis:**  
-- OpenSearch (can be serverless)  
+## 💡 Considerations / Best Practices (Not Yet Implemented)
 
-**Alerting:**  
-- CloudWatch metric filter → CloudWatch alarm → SNS → chatbot → Slack/Teams  
-- Grafana alerts
+These features show awareness of production-grade architecture:
 
-**Noise Reduction:**  
-- Alerts are time-averaged to reduce false positives.
+- **Monitoring & Metrics:**
+  - Lambda: invocation count, duration, throttles, concurrent executions  
+  - API Gateway: 4XX/5XX error rates, latency, request count  
 
-## 3. Security
+- **Dashboarding & Alerting:**
+  - Metrics visualization: Amazon Managed Grafana, Grafana Cloud or self hosted depending on team size and company goals
+  - Logs analysis: OpenSearch (can be serverless)
+  - Alerts: CloudWatch metric filters → CloudWatch alarms → SNS → Chatbot → Slack/Teams
+  - Noise reduction: Time-averaged alerts to reduce false positives
 
-> This project used a personal AWS root account. In production, use service-specific roles.
+- **Advanced Security / Hardening:**
+  - GuardDuty for threat detection
+  - AWS Advanced Shield for DDoS protection
+  - API Gateway REST Options: Can be placed in a VPC and made private via VPC endpoints, WAF, API keys, throttling, caching, traces.
+  - S3 versioning for Lambda code backups
 
-### API Gateway
-- HTTP API restricts access via IAM policies.  
-- Requests encrypted using HTTPS.  
-- Optional Cognito integration for authentication.
+## ⚡ How to Use / Test
 
-### Lambda
-- Only lists S3 bucket contents.  
-- IAM role has least privilege: `s3:ListBucket` only.  
-- Logs written to dedicated CloudWatch Log Group (optionally KMS encrypted).
-- Lambda uses HTTPS by default.
+1. Deploy **bootstrap Terraform stack** for GitHub Actions permissions, ECR / S3.
+2. Push code to GitHub:
+   - Triggers pipelines for Lambda deployment.  
+3. Use `terraform-infrastructure/test.py` to call API Gateway:
+   - Ensure your IAM role is added to the API Gateway policy to receive a `200 OK` response.
+   - Ensure you put the URL of the API gateway
 
-### S3 and KMS
-- Objects encrypted with KMS keys.  
-- Access granted to:
-  - Lambda (list objects)
-  - GitHub Actions role (deployment)  
-  - Root (replace with specific roles in production)  
-- S3 IAM Policy is for preventing access from other teams, KMS in case somebody has permissions to remove the policy.
-
-## 4. CI/CD Integration
-
-**GitHub Actions Workflow:**
-- **PR Workflow:** Runs Python tests. Protected branches prevent merging on test failure.  
-- **Build Workflow:** Runs tests, packages Lambda functions/layers, uploads to S3 with versioned tags, runs Terraform for infra chang
-
-## 5. Additional Hardening
-
-- **GuardDuty:** Threat detection  
-- **AWS Advanced Shield:** Optional for DDoS protection
-- **CI/CD Linting:** Ensures code quality and security checks 
-- **API Gateway REST Options:** Can be put in a VPC and made private using VPC endpoints
-- **S3 Versioning:** Optional for Lambda code backup (can retrieve older versions if deleted)  
-
-## 6. How to Use / Test
-
-1. Deploy resources in `terraform-bootstrap` for GitHub Actions permissions.  
-2. Push code to GitHub to trigger pipeline for further deployments.  
-3. In `terraform-infrastructure`, use `test.py` to call the API:  
-   - Add your role to the API policy for a `200` response.  
-
-> GitHub Actions was chosen for its features and wide familiarity among DevOps teams.
+## 🛠 Technology Stack
+- **AWS Services:** Lambda, API Gateway (HTTP), ECR, S3, KMS, IAM  
+- **CI/CD:** GitHub Actions  
+- **IaC:** Terraform  
+- **Programming Language:** Python
