@@ -17,7 +17,7 @@ resource "aws_ecr_lifecycle_policy" "project_name_ecr_lc_policy" {
         description  = "Expire untagged images if more than 4 exist"
         selection = {
           tagStatus = "tagged"
-          tagPrefixList : ["*v"] # TODO wildcard need as docs are not clear
+          tagPrefixList : ["dev", "prod"]
           countType   = "imageCountMoreThan"
           countNumber = 4
         }
