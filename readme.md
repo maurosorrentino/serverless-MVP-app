@@ -71,7 +71,7 @@ These features show awareness of production-grade architecture:
   - S3 versioning for Lambda code backups
 
 - **CI/CD Pipelines** (GitHub Actions)
-- Apart of unit and end to end test it should also run Linting and integration tests.
+  - Apart of unit and end to end test it should also run Linting and integration tests.
 
 ## ⚡ How to Use / Test
 
