@@ -142,7 +142,15 @@ resource "aws_iam_policy" "github_actions_policy" {
           "logs:DescribeResourcePolicies",
           "logs:DeleteResourcePolicy",
           "logs:ListLogDeliveries",
-          "logs:DeleteLogDelivery"
+          "logs:DeleteLogDelivery",
+          "ecr:GetAuthorizationToken",
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:BatchGetImage",
+          "ecr:PutImage",
+          "ecr:InitiateLayerUpload",
+          "ecr:UploadLayerPart",
+          "ecr:CompleteLayerUpload"
         ],
         Resource = "*"
       }
