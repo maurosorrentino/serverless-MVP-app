@@ -35,6 +35,4 @@ resource "aws_iam_policy" "project_name_lambda_policy" {
 resource "aws_iam_role_policy_attachment" "attach_custom" {
   role       = local.lambda_role_name
   policy_arn = aws_iam_policy.project_name_lambda_policy.arn
-
-  depends_on = [module.project_name_lambda]
 }
