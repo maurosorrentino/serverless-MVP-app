@@ -36,6 +36,10 @@ variable "lambda_version" {
   type        = string
 }
 
+variable "region" {
+  type = string
+}
+
 # use the following for lambda from S3
 # variable "lambda_handler" {
 #   description = "the function entry point in the code"

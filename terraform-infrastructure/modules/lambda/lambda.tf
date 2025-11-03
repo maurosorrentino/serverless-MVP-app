@@ -35,7 +35,7 @@ resource "aws_lambda_function" "project_name_list_s3_objects_lambda" {
   function_name = var.lambda_name
   package_type  = "Image"
   role          = aws_iam_role.project_name_lambda_exec.arn
-  image_uri     = "${var.account_id}.dkr.ecr.eu-west-1.amazonaws.com/${var.ecr_repo_lambda}:${var.lambda_version}"
+  image_uri     = "${var.account_id}.dkr.ecr.${var.region}.amazonaws.com/${var.ecr_repo_lambda}:${var.lambda_version}"
 
   timeout       = var.lambda_timeout
   memory_size   = var.lambda_memory

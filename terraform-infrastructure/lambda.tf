@@ -27,6 +27,7 @@ module "project_name_lambda" {
   lambda_name      = "${var.project_name}_list_s3_objects"
   account_id       = data.aws_caller_identity.current.account_id
   ecr_repo_lambda  = var.ecr_repo_lambda
+  region           = var.region
   lambda_version   = var.lambda_version
   lambda_timeout   = 30
   lambda_memory    = 128
