@@ -28,3 +28,7 @@ resource "aws_ecr_lifecycle_policy" "project_name_ecr_lc_policy" {
     ]
   })
 }
+
+output "project_name_ecr_repo_arn" {
+  value = aws_ecr_repository.project_name_ecr_repo.arn
+}

@@ -1,6 +1,7 @@
 variable "region" {
   description = "aws region where to deploy resources"
   type        = string
+  default     = "eu-west-2"
 }
 
 variable "project_name" {
@@ -10,6 +11,7 @@ variable "project_name" {
 
 variable "environment" {
   type = string
+  default = "dev"
 }
 
 # use this for lambda from ECR

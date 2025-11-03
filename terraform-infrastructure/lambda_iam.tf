@@ -19,7 +19,7 @@ resource "aws_iam_policy" "project_name_lambda_policy" {
           "ecr:BatchGetImage",
           "ecr:BatchCheckLayerAvailability"
         ]
-        Resource = aws_ecr_repository.project_name_ecr_repo.arn
+        Resource = data.terraform_remote_state.terraform_bootstrap.outputs.project_name_ecr_repo_arn
       }
     ]
   })
