@@ -33,6 +33,4 @@ module "project_name_lambda" {
     BUCKET_NAME = local.project_name_contents_s3_name
     LOG_LEVEL   = 20
   }
-
-  depends_on = [aws_iam_policy.project_name_lambda_policy]
 }
