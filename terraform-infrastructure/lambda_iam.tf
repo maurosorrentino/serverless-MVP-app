@@ -19,7 +19,12 @@ resource "aws_iam_policy" "project_name_lambda_policy" {
           "ecr:BatchGetImage",
           "ecr:BatchCheckLayerAvailability"
         ]
-        Resource = data.terraform_remote_state.terraform_bootstrap.outputs.project_name_ecr_repo_arn
+        Resource = "arn:aws:ecr:${var.region}:${data.aws_caller_identity.current.account_id}:repository/${var.project_name}-ecr-lambda-repo"
+      },
+      {
+        Effect = "Allow",
+        Action = "ecr:GetAuthorizationToken",
+        Resource = "*"
       }
     ]
   })
