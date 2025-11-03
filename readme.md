@@ -31,12 +31,18 @@ considerations for security, monitoring, and scalability.
 - Resource versioning and secure IAM permissions.
 
 ### CI/CD Pipelines (GitHub Actions)
-- **PR Workflow:** Runs Python unit tests to validate code before merge.
+- **PR Workflow:** Runs Python tests to validate code before merge.
 - **Build & Deploy Workflow:**
   - Packages Lambda (Docker image or zip)
   - Uploads to S3 or ECR
   - Applies Terraform changes automatically
 - **Checks:** Basic tests.
+
+### Rollback Strategy
+- Lambda functions are versioned using **semantic versioning** (e.g., 1.0.0, 1.0.1).  
+- CI/CD pipelines (both ECR and S3) allow deploying any existing version by selecting it in the workflow.  
+- If the version already exists, the pipeline reuses it; otherwise, it deploys a new one.  
+- This enables straightforward rollback by simply selecting a previous stable version.
 
 ### Security & Permissions
 - **KMS encryption** for sensitive S3 objects or in case somebody that shouldn't have access has permissions to delete s3 policy.
