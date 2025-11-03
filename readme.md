@@ -4,6 +4,7 @@
 alerting, and advanced security best practices for production environments.
 - Some IAM policies reference the root account because this project uses a personal AWS account. In production, replace 
 these with dedicated roles or remove root access entirely to follow the principle of least privilege.
+- When the repository was made public, all GitHub Actions IAM permissions were revoked to prevent unauthorized access to AWS.
 
 # Serverless AWS Project: Lambda + API Gateway
 
