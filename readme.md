@@ -70,6 +70,9 @@ These features show awareness of production-grade architecture:
   - API Gateway REST Options: Can be placed in a VPC and made private via VPC endpoints, WAF, API keys, throttling, caching, traces.
   - S3 versioning for Lambda code backups
 
+- **CI/CD Pipelines** (GitHub Actions)
+- Apart of unit and end to end test it should also run Linting and integration tests.
+
 ## ⚡ How to Use / Test
 
 1. Deploy **bootstrap Terraform stack** for GitHub Actions permissions, ECR / S3.
