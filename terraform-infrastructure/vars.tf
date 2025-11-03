@@ -8,14 +8,16 @@ variable "project_name" {
   default = "project-name"
 }
 
-variable "lambda_version" {
-  type = string
-}
-
 variable "environment" {
   type = string
 }
 
-variable "ecr_repo_lambda" {
+# use this for lambda from ECR
+variable "lambda_image" {
   type = string
 }
+
+# # use this for lambda from S3
+# variable "lambda_version" {
+#   type = string
+# }

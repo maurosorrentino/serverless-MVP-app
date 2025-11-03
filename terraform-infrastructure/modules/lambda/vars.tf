@@ -22,21 +22,7 @@ variable "env_vars" {
 }
 
 # use the following for lambda from ECR
-variable "account_id" {
-  type        = string
-}
-
-variable "ecr_repo_lambda" {
-  description = "the ECR repository name for the lambda function"
-  type        = string
-}
-
-variable "lambda_version" {
-  description = "the version tag for the lambda function image in ECR"
-  type        = string
-}
-
-variable "region" {
+variable "lambda_image" {
   type = string
 }
 
