@@ -6,16 +6,6 @@ variable "lambda_name" {
   type = string
 }
 
-variable "lambda_handler" {
-  description = "the function entry point in the code"
-  type        = string
-}
-
-variable "lambda_runtime" {
-  description = "the runtime environment for the Lambda function"
-  type        = string
-}
-
 variable "lambda_timeout" {
   description = "the amount of time that Lambda allows a function to run before stopping it"
   type        = number
@@ -31,21 +21,47 @@ variable "env_vars" {
   default     = {}
 }
 
-variable "project_name" {
-  type = string
-}
-
-variable "lambda_s3_bucket" {
-  description = "The S3 bucket where Lambda artifacts are stored"
+# use the following for lambda from ECR
+variable "account_id" {
   type        = string
 }
 
-variable "s3_lambda_key" {
-  description = "The S3 key for the Lambda function code"
+variable "ecr_repo_lambda" {
+  description = "the ECR repository name for the lambda function"
   type        = string
 }
 
-variable "layer_key" {
-  description = "lambda layer filename"
+variable "lambda_version" {
+  description = "the version tag for the lambda function image in ECR"
   type        = string
 }
+
+# use the following for lambda from S3
+# variable "lambda_handler" {
+#   description = "the function entry point in the code"
+#   type        = string
+# }
+
+# variable "lambda_runtime" {
+#   description = "the runtime environment for the Lambda function"
+#   type        = string
+# }
+
+# variable "project_name" {
+#   type = string
+# }
+
+# variable "lambda_s3_bucket" {
+#   description = "The S3 bucket where Lambda artifacts are stored"
+#   type        = string
+# }
+
+# variable "s3_lambda_key" {
+#   description = "The S3 key for the Lambda function code"
+#   type        = string
+# }
+
+# variable "layer_key" {
+#   description = "lambda layer filename"
+#   type        = string
+# }
