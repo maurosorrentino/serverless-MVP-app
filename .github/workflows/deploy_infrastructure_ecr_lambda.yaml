@@ -62,7 +62,7 @@ jobs:
       - name: Build and push lambda image
         run: |
           LAMBDA_TAG=${{ inputs.lambda_version }}
-          docker build -t $ECR_REPO_LAMBDA:$LAMBDA_TAG app/lambda
+          docker build -t $ECR_REPO_LAMBDA:$LAMBDA_TAG app
           docker tag $ECR_REPO_LAMBDA:$LAMBDA_TAG ${{ steps.login-ecr.outputs.registry }}/${ECR_REPO_LAMBDA}:$LAMBDA_TAG
           docker push ${{ steps.login-ecr.outputs.registry }}/${ECR_REPO_LAMBDA}:$LAMBDA_TAG
           echo "LAMBDA_IMAGE=${{ steps.login-ecr.outputs.registry }}/${ECR_REPO_LAMBDA}:$LAMBDA_TAG" >> $GITHUB_ENV
