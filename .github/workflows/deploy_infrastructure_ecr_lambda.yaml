@@ -86,7 +86,8 @@ jobs:
             -var="region=${AWS_REGION}" \
             -var="project_name=${TF_PROJECT_NAME}" \
             -var="lambda_version=${{ inputs.lambda_version }}" \
-            -var="environment=${{ inputs.environment }}"
+            -var="environment=${{ inputs.environment }}" \
+            -var="ecr_repo_lambda=${ECR_REPO_LAMBDA}"
 
       - name: Terraform Apply
         working-directory: terraform-infrastructure
@@ -95,7 +96,8 @@ jobs:
             -var="region=${AWS_REGION}" \
             -var="project_name=${TF_PROJECT_NAME}" \
             -var="lambda_version=${{ inputs.lambda_version }}" \
-            -var="environment=${{ inputs.environment }}"
+            -var="environment=${{ inputs.environment }}" \
+            -var="ecr_repo_lambda=${ECR_REPO_LAMBDA}"
 
       - name: Get Terraform Outputs
         uses: actions/upload-artifact@v4
