@@ -45,12 +45,6 @@ resource "aws_lambda_function_event_invoke_config" "project_name_lambda_invoke_c
   maximum_retry_attempts = 2
 }
 
-resource "aws_lambda_function_event_invoke_config" "project_name_lambda_invoke_config" {
-  function_name = aws_lambda_function.project_name_list_s3_objects_lambda.function_name
-
-  maximum_retry_attempts = 2
-}
-
 output "lambda_invoke_arn" {
   value = aws_lambda_function.project_name_list_s3_objects_lambda.invoke_arn
 }
