@@ -28,7 +28,7 @@ considerations for security, monitoring, and scalability.
 - Functionality: Lists contents of an S3 bucket (demonstrates least-privilege IAM role).
 
 ### Infrastructure as Code
-- **Terraform modules** for Lambda, API Gateway, ECR, S3, and KMS.
+- **Terraform modules** for Lambda, API Gateway, S3, and KMS.
 - Automated deployment pipelines via Terraform.
 - Resource versioning and secure IAM permissions.
 
@@ -63,7 +63,7 @@ considerations for security, monitoring, and scalability.
 These features show awareness of production-grade architecture:
 
 - **Monitoring & Metrics:**
-  - Lambda: invocation count, duration, throttles, concurrent executions  
+  - Lambda: invocation count, duration, throttles, concurrent executions, status codes != 200
   - API Gateway: 4XX/5XX error rates, latency, request count  
 
 - **Dashboarding & Alerting:**
