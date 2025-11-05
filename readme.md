@@ -1,3 +1,7 @@
+![Architecture Diagram](serverless_api_architecture.jpg)
+
+# Serverless AWS Project: Lambda + API Gateway
+
 ## 📌 Notes
 - HTTP API Gateway chosen for cost efficiency (~70% cheaper than REST).  
 - This project highlights real deployment pipelines and serverless architecture, while demonstrating awareness of monitoring, 
@@ -5,8 +9,6 @@ alerting, and advanced security best practices for production environments.
 - Some IAM policies reference the root account because this project uses a personal AWS account. In production, replace 
 these with dedicated roles or remove root access entirely to follow the principle of least privilege.
 - When the repository was made public, all GitHub Actions IAM permissions were revoked to prevent unauthorized access to AWS.
-
-# Serverless AWS Project: Lambda + API Gateway
 
 This project demonstrates a secure, serverless application built on **AWS Lambda**, exposed via **API Gateway**, with **CI/CD pipelines** and 
 infrastructure managed via **Terraform**. It’s a hands-on showcase of modern serverless architecture and deployment automation, including 
