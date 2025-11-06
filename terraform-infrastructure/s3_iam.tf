@@ -26,7 +26,7 @@ resource "aws_s3_bucket_policy" "s3_bucket_policy" {
         ]
         Condition = {
           StringNotEquals = {
-            # deny access to everyone except root user (or a role for a production setup)
+            # deny access to everyone except following, change as needed
             "aws:PrincipalArn" = [
               "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root",
               "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${local.github_actions_role_name}",
