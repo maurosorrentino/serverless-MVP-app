@@ -75,7 +75,7 @@ jobs:
           # export the image URI to be used in Terraform
           echo "LAMBDA_IMAGE=$REGISTRY/$ECR_REPO_LAMBDA:$LAMBDA_TAG" >> $GITHUB_ENV
 
-      - name: Setup Terraform 
+      - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
 
       - name: Terraform Init

@@ -14,6 +14,12 @@ This project demonstrates a secure, serverless application built on **AWS Lambda
 infrastructure managed via **Terraform**. It’s a hands-on showcase of modern serverless architecture and deployment automation, including 
 considerations for security, monitoring, and scalability.
 
+The current API module provisions a **new API Gateway instance each time it is invoked**.  
+It is best suited for **APIs with a single route**.  
+
+For APIs with **multiple routes**, consider using the [Serverless REST API project](https://github.com/maurosorrentino/serverless-rest-api-app), which is designed for multi-route REST APIs.  
+Although that project is REST-based, the code can be easily adapted for HTTP APIs if needed.
+
 ## ✅ Implemented Features
 
 ### AWS Lambda & API Gateway
