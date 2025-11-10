@@ -27,10 +27,7 @@ resource "aws_iam_policy" "project_name_lambda_policy" {
             "logs:CreateLogStream",
             "logs:PutLogEvents"
           ],
-          Resource = [
-            "arn:aws:logs:${var.region}:${var.account_id}:log-group:/aws/lambda/${var.lambda_name}:*",
-            "arn:aws:logs:${var.region}:${var.account_id}:log-group:/aws/lambda/${var.lambda_name}:log-stream:*"
-          ]
+          Resource = "arn:aws:logs:${var.region}:${var.account_id}:log-group:/aws/lambda/${var.lambda_name}:*"
         }
       ]
     })
@@ -39,4 +36,8 @@ resource "aws_iam_policy" "project_name_lambda_policy" {
 resource "aws_iam_role_policy_attachment" "project_name_lambda_basic" {
   role       = aws_iam_role.project_name_lambda_exec.name
   policy_arn = aws_iam_policy.project_name_lambda_policy.arn
+}
+
+output "lambda_role_name" {
+  value = aws_iam_role.project_name_lambda_exec.name
 }
