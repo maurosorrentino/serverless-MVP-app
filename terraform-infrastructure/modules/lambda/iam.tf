@@ -1,5 +1,5 @@
 resource "aws_iam_role" "project_name_lambda_exec" {
-  name = var.lambda_role_name
+  name = "${var.lambda_name}_exec_role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
