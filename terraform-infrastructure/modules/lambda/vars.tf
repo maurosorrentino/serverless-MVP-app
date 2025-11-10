@@ -17,6 +17,10 @@ variable "env_vars" {
   default     = {}
 }
 
+variable "lambda_role_name" {
+  type = string
+}
+
 # use the following for lambda from ECR
 variable "lambda_image" {
   type = string
