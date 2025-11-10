@@ -15,7 +15,28 @@ resource "aws_iam_role" "project_name_lambda_exec" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "attach_basic_execution" {
+resource "aws_iam_policy" "project_name_lambda_policy" {
+  name = "LambdaPushToCloudWatch"
+  policy = jsonencode({
+      Version = "2012-10-17",
+      Statement = [
+        {
+          Effect = "Allow",
+          Action = [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          Resource = [
+            "arn:aws:logs:${var.region}:${var.account_id}:log-group:/aws/lambda/${var.lambda_name}:*",
+            "arn:aws:logs:${var.region}:${var.account_id}:log-group:/aws/lambda/${var.lambda_name}:log-stream:*"
+          ]
+        }
+      ]
+    })
+}
+
+resource "aws_iam_role_policy_attachment" "project_name_lambda_basic" {
   role       = aws_iam_role.project_name_lambda_exec.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  policy_arn = aws_iam_policy.project_name_lambda_policy.arn
 }

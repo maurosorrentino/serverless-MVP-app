@@ -10,6 +10,8 @@
 #   lambda_name      = "${var.project_name}_list_s3_objects"
 #   lambda_handler   = "get_s3_objects.lambda_handler"
 #   lambda_runtime   = "python3.11"
+#   region           = var.region
+#   account_id       = local.account_id
 #   lambda_timeout   = 30
 #   lambda_memory    = 128
 
@@ -28,6 +30,8 @@ module "project_name_lambda" {
   lambda_image     = var.lambda_image
   lambda_timeout   = 30
   lambda_memory    = 128
+  region           = var.region
+  account_id       = local.account_id
 
   env_vars = {
     BUCKET_NAME = local.project_name_contents_s3_name

@@ -7,7 +7,7 @@ resource "aws_s3_bucket_policy" "s3_bucket_policy" {
         Sid    = "AllowLambdaAccess"
         Effect = "Allow"
         Principal = {
-          AWS = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${local.lambda_role_name}"
+          AWS = "arn:aws:iam::${local.account_id}:role/${local.lambda_role_name}"
         }
         Action = "s3:ListBucket"
         Resource = [
@@ -28,9 +28,9 @@ resource "aws_s3_bucket_policy" "s3_bucket_policy" {
           StringNotEquals = {
             # deny access to everyone except following, change as needed
             "aws:PrincipalArn" = [
-              "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root",
-              "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${local.github_actions_role_name}",
-              "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${local.lambda_role_name}"
+              "arn:aws:iam::${local.account_id}:root",
+              "arn:aws:iam::${local.account_id}:role/${local.github_actions_role_name}",
+              "arn:aws:iam::${local.account_id}:role/${local.lambda_role_name}"
             ]
           }
         }

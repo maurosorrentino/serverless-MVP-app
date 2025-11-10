@@ -3,4 +3,5 @@ locals {
   github_actions_role_name      = "${var.environment}GitHubActionsProjectNameRole"
   lambda_role_name              = "${var.project_name}NameLambdaRole"
   api_name                      = "${var.project_name}-api-gateway"
+  account_id                    = data.aws_caller_identity.current.account_id
 }
