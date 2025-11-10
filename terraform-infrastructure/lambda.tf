@@ -2,7 +2,6 @@
 # module "project_name_lambda" {
 #   source = "./modules/lambda"
 
-#   lambda_role_name = local.lambda_role_name
 #   project_name     = var.project_name
 #   lambda_s3_bucket = data.aws_s3_bucket.lambda_artifacts_s3.bucket
 #   layer_key        = "list-s3-contents-${var.lambda_version}-layer.zip"
@@ -25,7 +24,6 @@
 module "project_name_lambda" {
   source = "./modules/lambda"
 
-  lambda_role_name = local.lambda_role_name
   lambda_name      = "${var.project_name}_list_s3_objects"
   lambda_image     = var.lambda_image
   lambda_timeout   = 30

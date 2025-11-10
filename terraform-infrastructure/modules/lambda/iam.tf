@@ -16,7 +16,7 @@ resource "aws_iam_role" "project_name_lambda_exec" {
 }
 
 resource "aws_iam_policy" "project_name_lambda_policy" {
-  name = "LambdaPushToCloudWatch"
+  name = "${var.lambda_name}LambdaPushToCloudWatch"
   policy = jsonencode({
       Version = "2012-10-17",
       Statement = [
