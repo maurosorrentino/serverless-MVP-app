@@ -62,10 +62,7 @@ jobs:
             echo "Artifact $S3_KEY already exists. Skipping build."
           else
             echo "Building Lambda package for version ${{ inputs.lambda_version }}"
-            cd app
-            pip install -r requirements.txt -t .
-            zip -r ../lambda.zip .
-            cd ..
+            zip -r ./lambda.zip .
             aws s3 cp lambda.zip s3://${LAMBDA_ARTIFACTS_BUCKET}/$S3_KEY
           fi
 
