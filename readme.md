@@ -25,9 +25,9 @@ Although that project is REST-based, the code can be easily adapted for HTTP API
 ### AWS Lambda & API Gateway
 - Lambda function exposed via **HTTP API Gateway**.
 - Supports:
-  - **Lambda from Docker Image** (built and pushed to **ECR** via CI/CD pipeline).  
-  - **Lambda from S3** (packaged zip uploaded via CI/CD pipeline, follow instructions in the comment to enable this as ECR code needs to be 
-  commented and s3 code needs to be uncommented).  
+  - **Lambda from Docker Image** (built and pushed to **ECR** via CI/CD pipeline, follow instructions in the comment to enable 
+  this as S3 code needs to be commented and ECR code needs to be uncommented).  
+  - **Lambda from S3** (packaged zip uploaded via CI/CD pipeline).
 - Basic API security:
   - HTTPS requests
   - IAM policy-based access control
