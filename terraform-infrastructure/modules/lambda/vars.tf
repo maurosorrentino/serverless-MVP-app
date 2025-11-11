@@ -21,18 +21,13 @@ variable "lambda_role_name" {
   type = string
 }
 
-# use the following for lambda from ECR
-# variable "lambda_image" {
-#   type = string
-# }
+variable "region" {
+  type = string
+}
 
-# variable "region" {
-#   type = string
-# }
-
-# variable "account_id" {
-#   type = string
-# }
+variable "account_id" {
+  type = string
+}
 
 # use the following for lambda from S3
 variable "lambda_handler" {
@@ -63,3 +58,8 @@ variable "layer_key" {
   description = "lambda layer filename"
   type        = string
 }
+
+# use the following for lambda from ECR
+# variable "lambda_image" {
+#   type = string
+# }
