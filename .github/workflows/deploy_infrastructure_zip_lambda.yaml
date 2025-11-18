@@ -62,6 +62,7 @@ jobs:
       - name: Build Lambda Layer if it doesn't exist
         run: |
           ../scripts/build_artifact.sh layer ${{ inputs.lambda_version }} $LAMBDA_ARTIFACTS_BUCKET"
+          
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
 
