@@ -57,31 +57,11 @@ jobs:
 
       - name: Build Lambda if artifact doesn't exist
         run: |
-          S3_KEY="list-s3-contents-${{ inputs.lambda_version }}-lambda.zip"
-          if aws s3 ls s3://${LAMBDA_ARTIFACTS_BUCKET}/$S3_KEY; then
-            echo "Artifact $S3_KEY already exists. Skipping build."
-          else
-            echo "Building Lambda package for version ${{ inputs.lambda_version }}"
-            cd app
-            zip -r ../lambda.zip .
-            cd ..
-            aws s3 cp lambda.zip s3://${LAMBDA_ARTIFACTS_BUCKET}/$S3_KEY
-          fi
+          ../scripts/build_artifact.sh lambda ${{ inputs.lambda_version }} $LAMBDA_ARTIFACTS_BUCKET"
 
       - name: Build Lambda Layer if it doesn't exist
         run: |
-          S3_KEY="list-s3-contents-${{ inputs.lambda_version }}-layer.zip"
-          if aws s3 ls s3://${LAMBDA_ARTIFACTS_BUCKET}/$S3_KEY; then
-            echo "Artifact $S3_KEY already exists. Skipping layer build."
-          else
-            echo "Building Lambda layer for version ${{ inputs.lambda_version }}"
-            cd app
-            pip install -r requirements.txt -t python
-            zip -r ../lambda_layer.zip .
-            cd ..
-            aws s3 cp lambda_layer.zip s3://${LAMBDA_ARTIFACTS_BUCKET}/$S3_KEY
-          fi
-
+          ../scripts/build_artifact.sh layer ${{ inputs.lambda_version }} $LAMBDA_ARTIFACTS_BUCKET"
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
 
