@@ -46,6 +46,10 @@ Although that project is REST-based, the code can be easily adapted for HTTP API
   - Applies Terraform changes automatically
 - **Checks:** Basic tests.
 
+Additionally, GitHub Actions environments have been configured (e.g., dev), each containing a secret named AWS_ROLE_ARN. The CI/CD 
+workflows assume this secret is available so they can dynamically assume the correct AWS IAM role for that environment. This 
+allows us to reuse the same Terraform code across all environments without needing separate configuration files.
+
 ### Rollback Strategy
 - Lambda functions are versioned using **semantic versioning** (e.g., 1.0.0, 1.0.1).  
 - CI/CD pipelines (both ECR and S3) allow deploying any existing version by selecting it in the workflow.  
