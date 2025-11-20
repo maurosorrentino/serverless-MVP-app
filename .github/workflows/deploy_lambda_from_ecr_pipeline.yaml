@@ -10,6 +10,14 @@ on:
         required: true
         default: 'dev-v1.0.0'
         type: string
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - prod
 
 permissions:
   id-token: write
