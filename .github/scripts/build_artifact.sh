@@ -4,7 +4,7 @@ set -euo pipefail
 ZIP_FILE_NAME="$1"
 VERSION="$2"
 LAMBDA_ARTIFACTS_BUCKET="$3"
-FILE_NAME="$3"
+FILE_NAME="$4"
 
 S3_KEY="list-s3-contents-$VERSION-$ZIP_FILE_NAME.zip"
 
