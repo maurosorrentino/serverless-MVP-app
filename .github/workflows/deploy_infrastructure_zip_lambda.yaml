@@ -58,12 +58,12 @@ jobs:
       - name: Build Lambda if artifact doesn't exist
         run: |
           chmod +rwx ./.github/scripts/build_artifact.sh
-          ./.github/scripts/build_artifact.sh lambda ${{ inputs.lambda_version }} $LAMBDA_ARTIFACTS_BUCKET
+          ./.github/scripts/build_artifact.sh lambda ${{ inputs.lambda_version }} $LAMBDA_ARTIFACTS_BUCKET get_s3_objects.py
 
       - name: Build Lambda Layer if it doesn't exist
         run: |
           chmod +rwx ./.github/scripts/build_artifact.sh
-          ./.github/scripts/build_artifact.sh layer ${{ inputs.lambda_version }} $LAMBDA_ARTIFACTS_BUCKET
+          ./.github/scripts/build_artifact.sh layer ${{ inputs.lambda_version }} $LAMBDA_ARTIFACTS_BUCKET requirements.txt
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
