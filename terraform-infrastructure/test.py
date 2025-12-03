@@ -12,6 +12,6 @@ auth = AWS4Auth(
     session_token=credentials.token
 )
 
-url = "https://URL/dev/"
+url = "URL/dev/"
 r = requests.get(url, auth=auth)
 print(r.status_code, r.text)

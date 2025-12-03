@@ -9,6 +9,8 @@ variable "project_name" {
   default = "project-name"
 }
 
+# this is an example of variable that can be used based on the environment
+# the value it's passed from the pipeline to use the same code for each environemnt
 variable "environment" {
   type = string
   default = "dev"
