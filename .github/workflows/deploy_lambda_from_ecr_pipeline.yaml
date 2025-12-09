@@ -25,7 +25,7 @@ permissions:
 
 jobs:
   deploy:
-    name: Deploying ${{ github.ref_name }} version
+    name: Deploying ${{ github.ref_name || github.event.inputs.lambda_version }} version
     uses: ./.github/workflows/deploy_infrastructure_ecr_lambda.yaml
     secrets: inherit
     with:
