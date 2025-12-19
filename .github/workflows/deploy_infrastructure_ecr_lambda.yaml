@@ -71,20 +71,6 @@ jobs:
           chmod +rwx ./.github/scripts/build_push_image_to_ecr.sh
           ./.github/scripts/build_push_image_to_ecr.sh $LAMBDA_TAG $ECR_REPO_LAMBDA $REGISTRY app
           
-          LAMBDA_TAG=${{ inputs.lambda_version }}
-          REGISTRY=${{ steps.login-ecr.outputs.registry }}
-
-          if aws ecr describe-images --repository-name=$ECR_REPO_LAMBDA --image-ids=imageTag=$LAMBDA_TAG; then
-              echo "Image already exists. Skipping build and push."
-          else
-              echo "Image not found. Building and pushing..."
-              docker build -t $ECR_REPO_LAMBDA:$LAMBDA_TAG app
-              docker tag $ECR_REPO_LAMBDA:$LAMBDA_TAG $REGISTRY/$ECR_REPO_LAMBDA:$LAMBDA_TAG
-              docker push $REGISTRY/$ECR_REPO_LAMBDA:$LAMBDA_TAG
-          fi
-          # export the image URI to be used in Terraform
-          echo "LAMBDA_IMAGE=$REGISTRY/$ECR_REPO_LAMBDA:$LAMBDA_TAG" >> $GITHUB_ENV
-
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
 

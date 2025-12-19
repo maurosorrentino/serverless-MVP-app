@@ -21,5 +21,4 @@ else
   docker push "$REGISTRY/$ECR_REPO:$LAMBDA_VERSION"
 fi
 
-# Export the image URI for GitHub Actions
-echo "$IMAGE_URI=$REGISTRY/$ECR_REPO:$LAMBDA_VERSION" >> "$GITHUB_ENV"
+echo "LAMBDA_IMAGE=$REGISTRY/$ECR_REPO:$LAMBDA_VERSION" >> "$GITHUB_ENV"
