@@ -17,11 +17,11 @@ variable "environment" {
 }
 
 # use this for lambda from ECR
-variable "lambda_image" {
-  type = string
-}
-
-# # # use this for lambda from S3
-# variable "lambda_version" {
+# variable "lambda_image" {
 #   type = string
 # }
+
+# use this for lambda from S3
+variable "lambda_version" {
+  type = string
+}
