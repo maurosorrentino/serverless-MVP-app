@@ -1,3 +1,4 @@
+# default values are for running terraform locally
 variable "region" {
   description = "aws region where to deploy resources"
   type        = string
