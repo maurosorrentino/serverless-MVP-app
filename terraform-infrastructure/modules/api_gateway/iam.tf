@@ -17,7 +17,7 @@ resource "aws_iam_policy" "invoke_policy" {
       {
         Effect   = "Allow"
         Action   = ["execute-api:Invoke"]
-        Resource = "${aws_apigatewayv2_api.http_api.execution_arn}/*/GET/"
+        Resource = "${aws_apigatewayv2_api.http_api.execution_arn}/${var.environment}/GET/"
         Condition = {
           StringEquals = {
             "aws:PrincipalArn" = [

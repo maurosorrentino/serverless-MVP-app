@@ -20,6 +20,7 @@ jobs:
 
       # loading environment variables from .github/workflows/env_vars/<environment>/env_vars.json
       # the reason why is because we can set the vars once and use them in multiple pipelines
+      # TODO it should be a script
       - name: Load environment configuration
         id: load-env
         run: |

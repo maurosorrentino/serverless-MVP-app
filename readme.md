@@ -45,6 +45,7 @@ Although that project is REST-based, the code can be easily adapted for HTTP API
   - Uploads to S3 or ECR
   - Applies Terraform changes automatically
 - **Checks:** Basic tests.
+- **TODO** loading env variables should be a script
 
 Additionally, GitHub Actions environments have been configured (e.g., dev), each containing a secret named AWS_ROLE_ARN. 
 The CI/CD workflows assume this secret is available so they can dynamically assume the correct AWS IAM role for that 
@@ -110,3 +111,5 @@ These features show awareness of production-grade architecture:
 - **CI/CD:** GitHub Actions  
 - **IaC:** Terraform  
 - **Programming Language:** Python
+
+
