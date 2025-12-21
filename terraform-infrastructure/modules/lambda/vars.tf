@@ -30,36 +30,36 @@ variable "account_id" {
 }
 
 # use the following for lambda from S3
-variable "lambda_handler" {
-  description = "the function entry point in the code"
-  type        = string
-}
+# variable "lambda_handler" {
+#   description = "the function entry point in the code"
+#   type        = string
+# }
 
-variable "lambda_runtime" {
-  description = "the runtime environment for the Lambda function"
-  type        = string
-}
+# variable "lambda_runtime" {
+#   description = "the runtime environment for the Lambda function"
+#   type        = string
+# }
 
-variable "project_name" {
-  type = string
-}
-
-variable "lambda_s3_bucket" {
-  description = "The S3 bucket where Lambda artifacts are stored"
-  type        = string
-}
-
-variable "s3_lambda_key" {
-  description = "The S3 key for the Lambda function code"
-  type        = string
-}
-
-variable "layer_key" {
-  description = "lambda layer filename"
-  type        = string
-}
-
-# use the following for lambda from ECR
-# variable "lambda_image" {
+# variable "project_name" {
 #   type = string
 # }
+
+# variable "lambda_s3_bucket" {
+#   description = "The S3 bucket where Lambda artifacts are stored"
+#   type        = string
+# }
+
+# variable "s3_lambda_key" {
+#   description = "The S3 key for the Lambda function code"
+#   type        = string
+# }
+
+# variable "layer_key" {
+#   description = "lambda layer filename"
+#   type        = string
+# }
+
+# use the following for lambda from ECR
+variable "lambda_image" {
+  type = string
+}
