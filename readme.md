@@ -2,7 +2,7 @@
 
 # Serverless AWS Project: Lambda + API Gateway
 
-## 📌 Notes
+## Notes
 - HTTP API Gateway chosen for cost efficiency (~70% cheaper than REST).  
 - This project highlights real deployment pipelines and serverless architecture, while demonstrating awareness of monitoring, 
 alerting, and advanced security best practices for production environments.
@@ -20,7 +20,7 @@ It is best suited for **APIs with a single route**.
 For APIs with **multiple routes**, consider using the [Serverless REST API project](https://github.com/maurosorrentino/serverless-rest-api-app), which is designed for multi-route REST APIs.  
 Although that project is REST-based, the code can be easily adapted for HTTP APIs if needed.
 
-## ✅ Implemented Features
+## Implemented Features
 
 ### AWS Lambda & API Gateway
 - Lambda function exposed via **HTTP API Gateway**.
@@ -74,7 +74,7 @@ when manually running the pipeline.
 ### Monitoring
 - Centralized logging and structured parsing in CloudWatch
 
-## 💡 Considerations / Best Practices (Not Yet Implemented)
+## Considerations / Best Practices (Not Yet Implemented)
 
 These features show awareness of production-grade architecture:
 
@@ -97,7 +97,7 @@ These features show awareness of production-grade architecture:
 - **CI/CD Pipelines** (GitHub Actions)
   - Apart of unit and end to end test it should also run Linting and integration tests.
 
-## ⚡ How to Use / Test
+## How to Use / Test
 
 1. Deploy **bootstrap Terraform stack** for GitHub Actions permissions, ECR / S3.
 2. Push code to GitHub:
